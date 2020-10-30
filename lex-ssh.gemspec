@@ -16,7 +16,7 @@ Gem::Specification.new do |spec|
   spec.metadata['source_code_uri'] = 'https://bitbucket.org/legion-io/lex-ssh'
   spec.metadata['documentation_uri'] = 'https://legionio.atlassian.net/wiki/spaces/LEX/pages/614891551'
   spec.metadata['changelog_uri'] = 'https://legionio.atlassian.net/wiki/spaces/LEX/pages/612270160'
-  spec.metadata['bug_tracker_uri'] = 'https://bitbucket.org/legion-io/lex-wled/issues'
+  spec.metadata['bug_tracker_uri'] = 'https://bitbucket.org/legion-io/lex-ssh/issues'
   spec.require_paths = ['lib']
 
   spec.add_dependency 'bcrypt_pbkdf'
