@@ -1,11 +1,29 @@
-image: ruby:2.7.0
+image: ruby:2.7
 
 pipelines:
   tags:
     "v*":
       - step:
+          name: Tag Rubocop
+          caches:
+            - bundler
+          script:
+            - gem install rubocop
+            - gem update rubocop
+            - rubocop
+      - step:
+          name: Tag RSpec
+          caches:
+            - bundler
+          script:
+            - gem install bundler
+            - gem update bundler
+            - bundle update
+            - bundle exec rspec
+      - step:
           name: Push to RubyGems
           deployment: RubyGems
+          trigger: manual
           script:
             - gem install bundler gem-release rake rspec
             - bundle install
@@ -15,3 +33,24 @@ pipelines:
             - gem release
           artifacts:
             - pkg/**
+  branches:
+    master|develop:
+      - step:
+          caches:
+            - bundler
+          script:
+            - gem install rubocop
+            - gem update rubocop
+            - rubocop
+      - step:
+          caches:
+            - bundler
+          script:
+            - gem install bundler
+            - gem update bundler
+            - bundle update
+            - bundle exec rspec
+
+definitions:
+  caches:
+    bundler: vendor/bundle
