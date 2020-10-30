@@ -36,7 +36,23 @@ pipelines:
           artifacts:
             - pkg/**
   branches:
-    master|develop:
+    master:
+      - step:
+          caches:
+            - bundler
+          script:
+            - gem install rubocop
+            - gem update rubocop
+            - rubocop
+      - step:
+          caches:
+            - bundler
+          script:
+            - gem install bundler
+            - gem update bundler
+            - bundle update
+            - bundle exec rspec
+    develop:
       - step:
           caches:
             - bundler
