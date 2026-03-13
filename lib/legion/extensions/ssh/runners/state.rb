@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Legion
   module Extensions
     module Ssh
@@ -5,15 +7,15 @@ module Legion
         module State
           include Legion::Extensions::Ssh::Helpers::Connection
 
-          def reboot(server:, user: 'root', delay: 0, **opts)
-            session = session(server: server, user: user, **opts)
+          def reboot(server:, user: 'root', delay: 0, **)
+            session = session(server: server, user: user, **)
             command = delay.zero? ? 'shutdown -r now' : "shutdown -r +#{delay}"
             results = session.exec!(command)
             { success: results.exitstatus.zero?, results: results, server: server, delay: delay }
           end
 
-          def shutdown(server:, user: 'root', delay: 0, **opts)
-            session = session(server: server, user: user, **opts)
+          def shutdown(server:, user: 'root', delay: 0, **)
+            session = session(server: server, user: user, **)
             command = delay.zero? ? 'shutdown -h now' : "shutdown -h +#{delay}"
             results = session.exec!(command)
             { success: results.exitstatus.zero?, results: results, server: server, delay: delay }

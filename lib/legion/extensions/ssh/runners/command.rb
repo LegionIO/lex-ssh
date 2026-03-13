@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Legion
   module Extensions
     module Ssh
@@ -5,14 +7,14 @@ module Legion
         module Command
           include Legion::Extensions::Ssh::Helpers::Connection
 
-          def run(command:, server:, user: 'root', **opts)
-            session = session(server: server, user: user, **opts)
+          def run(command:, server:, user: 'root', **)
+            session = session(server: server, user: user, **)
             results = session.exec!(command)
             { success: results.exitstatus.zero?, results: results, server: server }
           end
 
-          def run_mulitple(commands:, server:, user: 'root', **opts)
-            session = session(server: server, user: user, **opts)
+          def run_mulitple(commands:, server:, user: 'root', **)
+            session = session(server: server, user: user, **)
             final_results = []
 
             commands.each do |command|
