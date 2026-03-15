@@ -21,7 +21,8 @@ module Legion
             { success: results.exitstatus.zero?, results: results, server: server, delay: delay }
           end
 
-          include Legion::Extensions::Helpers::Lex
+          include Legion::Extensions::Helpers::Lex if Legion::Extensions.const_defined?(:Helpers) &&
+                                                      Legion::Extensions::Helpers.const_defined?(:Lex)
         end
       end
     end

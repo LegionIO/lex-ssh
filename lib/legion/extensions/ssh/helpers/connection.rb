@@ -18,7 +18,7 @@ module Legion
             end
             hash[:non_interactive] = opts.key?(:non_interactive) ? opts[:non_interactive] : true
             hash[:passphrase] = opts[:passphrase] if opts.key? :passphrase
-            hash[:timeout] = opts.key(:timeout) ? opts[:timeout] : 5
+            hash[:timeout] = opts.key?(:timeout) ? opts[:timeout] : 5
 
             Net::SSH.start(server, user, **hash)
           end
