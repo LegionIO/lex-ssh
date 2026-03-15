@@ -26,11 +26,6 @@ Gem::Specification.new do |spec|
 
   spec.require_paths = ['lib']
 
-  spec.add_development_dependency 'bundler', '>= 2'
-  spec.add_development_dependency 'rake'
-  spec.add_development_dependency 'rspec'
-  spec.add_development_dependency 'rubocop'
-
   spec.add_dependency 'bcrypt_pbkdf'
   spec.add_dependency 'ed25519'
   spec.add_dependency 'net-ssh', '>= 7.0'
