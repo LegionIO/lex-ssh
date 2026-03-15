@@ -46,6 +46,16 @@ Pass authentication kwargs alongside other parameters:
 | `passphrase` | Key passphrase |
 | `timeout` | Connection timeout in seconds (default: 5) |
 
+## Standalone Client
+
+Use `Legion::Extensions::Ssh::Client` outside the full LegionIO framework.
+
+```ruby
+require 'legion/extensions/ssh'
+client = Legion::Extensions::Ssh::Client.new(host: 'server.example.com', user: 'deploy', keys: ['~/.ssh/id_ed25519'])
+result = client.run(command: 'uptime')
+```
+
 ## Requirements
 
 - Ruby >= 3.4
@@ -54,6 +64,13 @@ Pass authentication kwargs alongside other parameters:
 - `net-ssh` >= 7.0
 - `ed25519` — Ed25519 key support
 - `bcrypt_pbkdf` — OpenSSH private key format support
+
+## Changelog
+
+### v0.2.0
+
+- Added standalone `Client` class.
+- Fixed `opts.key?(:timeout)` in `Helpers::Connection` — the previous `opts.key(:timeout)` always returned a truthy key object, so the `timeout` option was never read from task kwargs.
 
 ## License
 
