@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.2.1] - 2026-03-18
+
+### Fixed
+- Added `logger` gem as runtime dependency for Ruby 4.0 compatibility (removed from default gems)
+
 ## [0.2.0] - 2026-03-15
 
 ### Added

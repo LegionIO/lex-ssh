@@ -28,5 +28,6 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency 'bcrypt_pbkdf'
   spec.add_dependency 'ed25519'
+  spec.add_dependency 'logger'
   spec.add_dependency 'net-ssh', '>= 7.0'
 end
