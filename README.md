@@ -52,25 +52,19 @@ Use `Legion::Extensions::Ssh::Client` outside the full LegionIO framework.
 
 ```ruby
 require 'legion/extensions/ssh'
-client = Legion::Extensions::Ssh::Client.new(host: 'server.example.com', user: 'deploy', keys: ['~/.ssh/id_ed25519'])
+client = Legion::Extensions::Ssh::Client.new(server: 'server.example.com', user: 'deploy', keys: ['~/.ssh/id_ed25519'])
 result = client.run(command: 'uptime')
 ```
+
+Constructor: `Client.new(server:, user: 'root', **extra)`. Additional kwargs (`keys:`, `password:`, `timeout:`, etc.) are stored and passed through to Net::SSH on each call.
 
 ## Requirements
 
 - Ruby >= 3.4
-- [LegionIO](https://github.com/LegionIO/LegionIO) framework
 - SSH server access
 - `net-ssh` >= 7.0
 - `ed25519` — Ed25519 key support
 - `bcrypt_pbkdf` — OpenSSH private key format support
-
-## Changelog
-
-### v0.2.0
-
-- Added standalone `Client` class.
-- Fixed `opts.key?(:timeout)` in `Helpers::Connection` — the previous `opts.key(:timeout)` always returned a truthy key object, so the `timeout` option was never read from task kwargs.
 
 ## License
 

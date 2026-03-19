@@ -8,7 +8,7 @@
 
 Legion Extension that executes remote SSH commands and controls remote server state. Provides runners for running arbitrary commands on remote hosts and triggering reboot/shutdown via Net::SSH.
 
-**Version**: 0.2.0
+**Version**: 0.2.1
 **GitHub**: https://github.com/LegionIO/lex-ssh
 **License**: MIT
 
@@ -32,7 +32,7 @@ Legion::Extensions::Ssh
 | `lib/legion/extensions/ssh/runners/command.rb` | `run`, `run_multiple` (and `alias run_multiple run_mulitple` for typo compat) |
 | `lib/legion/extensions/ssh/runners/state.rb` | `reboot(server:, user:, delay:)`, `shutdown(server:, user:, delay:)` |
 | `lib/legion/extensions/ssh/helpers/connection.rb` | `session(server:, user:, **opts)` — Net::SSH.start wrapper |
-| `lib/legion/extensions/ssh/client.rb` | Standalone `Client` class for use outside Legion framework |
+| `lib/legion/extensions/ssh/client.rb` | Standalone `Client` class: `initialize(server:, user: 'root', **extra)` |
 
 ## Runner Methods
 
@@ -46,9 +46,14 @@ Legion::Extensions::Ssh
 
 **Connection auth** (pass as task kwargs): `password:`, `key_data:`, `keys:`, `passphrase:`, `non_interactive:`, `timeout:` (default: 5s)
 
-## Bug Fixes (v0.2.0)
+## Standalone Client
 
-- Fixed `opts.key(:timeout)` typo in `Helpers::Connection` — corrected to `opts.key?(:timeout)`. The old code always returned the key object (truthy) instead of checking presence, so `timeout` was never read from opts.
+`Client.new(server:, user: 'root', **extra)` — stores opts and delegates `session` to `Helpers::Connection` with merged opts.
+
+```ruby
+client = Legion::Extensions::Ssh::Client.new(server: 'server.example.com', user: 'deploy', keys: ['~/.ssh/id_ed25519'])
+result = client.run(command: 'uptime')
+```
 
 ## Dependencies
 
@@ -57,10 +62,11 @@ Legion::Extensions::Ssh
 | `net-ssh` (>= 7.0) | SSH client |
 | `ed25519` | Ed25519 key support |
 | `bcrypt_pbkdf` | Bcrypt key derivation (OpenSSH private key format) |
+| `logger` | Explicit dependency for Ruby 4.0 compatibility (extracted from stdlib) |
 
 ## Development
 
-9 specs total across `spec/legion/extensions/ssh/client_spec.rb`, `runners/command_spec.rb`, and `runners/state_spec.rb`.
+9 specs total.
 
 ```bash
 bundle install
