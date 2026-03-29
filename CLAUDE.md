@@ -8,7 +8,7 @@
 
 Legion Extension that executes remote SSH commands and controls remote server state. Provides runners for running arbitrary commands on remote hosts and triggering reboot/shutdown via Net::SSH.
 
-**Version**: 0.2.1
+**Version**: 0.2.2
 **GitHub**: https://github.com/LegionIO/lex-ssh
 **License**: MIT
 
